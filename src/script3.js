@@ -79,7 +79,7 @@ const mouse = {
     y: undefined,
 }
 
-canvas.addEventListener('click', function (event) {
+function themeProperties(event) {
     mouse.x = event.x;
     mouse.y = event.y;
     if (selectedButtons.firstButtonSelected) {
@@ -102,38 +102,10 @@ canvas.addEventListener('click', function (event) {
             particlesArray.push(new Particle());
         }
     }
-    // for (let i = 0; i < 50; i++) {
-    //     particlesArray.push(new Particle());
-    // }
-})
+}
 
-canvas.addEventListener('mousemove', function (event) {
-    mouse.x = event.x;
-    mouse.y = event.y;
-    if (selectedButtons.firstButtonSelected) {
-        for (let i = 0; i < 5; i++) {
-            particlesArray.push(new Particle());
-        }
-    }
-    if (selectedButtons.secondButtonSelected) {
-        for (let i = 0; i < 10; i++) {
-            particlesArray.push(new Particle());
-        }
-    }
-    if (selectedButtons.thirdButtonSelected) {
-        for (let i = 0; i < 25; i++) {
-            particlesArray.push(new Particle());
-        }
-    }
-    if (selectedButtons.fourthButtonSelected) {
-        for (let i = 0; i < 50; i++) {
-            particlesArray.push(new Particle());
-        }
-    }
-    // for (let i = 0; i < 50; i++) {
-    //     particlesArray.push(new Particle());
-    // }
-})
+canvas.addEventListener('click', themeProperties)
+canvas.addEventListener('mousemove', themeProperties)
 
 class Particle {
     constructor() {
@@ -154,7 +126,6 @@ class Particle {
             if (this.size > 2) this.size -= 1;
         }
         if (this.size > 0.2) this.size -= 0.1;
-        //if (this.size > 2) this.size -= 1;
     }
     draw() {
         ctx.fillStyle = this.color;
@@ -176,7 +147,7 @@ function handleParticles() {
                 if (distance < 100) {
                     ctx.beginPath();
                     ctx.strokeStyle = particlesArray[i].color;
-                    // ctx.lineWidth = particlesArray[i].size/10;
+                    // ctx.lineWidth = particlesArray[i].size/2;
                     ctx.lineWidth = 0.2;
                     ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
                     ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
@@ -186,10 +157,13 @@ function handleParticles() {
             }
 
         }
-        if (particlesArray[i].size <= 0.2) {
-            particlesArray.splice(i, 1);
-            i--;
+        if (selectedButtons.secondButtonSelected) {
+            if (particlesArray[i].size <= 0.17) {
+                particlesArray.splice(i, 1);
+                i--;
+            }
         }
+
     }
 }
 
