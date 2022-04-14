@@ -1,3 +1,5 @@
-Have fun! 🌠
+I decided to teach myself some HTML canvas as an entry point into WebGL.
 
- https://justkakai.github.io/HTML-Canvas-Demo/
+This is my first (very basic) demo 🌠
+
+https://justkakai.github.io/HTML-Canvas-Demo/
