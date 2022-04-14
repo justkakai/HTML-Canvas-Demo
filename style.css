@@ -1,8 +1,29 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 #canvas1 {
-    position: absolute;
-    background: black;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+  /* position: absolute; */
+  background: black;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+button {
+  font-family: "Architects Daughter", cursive;
+  font-size: 30px;
+  display: block;
+  /* background-color: #e30b5c; */
+  color: white;
+  width: 500px;
+  height: 100px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 2px;
+  background: linear-gradient(145deg, #3f3c3c, #3c0669);
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
 }

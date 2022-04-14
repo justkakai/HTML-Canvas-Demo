@@ -1,7 +1,13 @@
+const button = document.getElementById('clear');
+
+button.addEventListener('click', function() {
+    particlesArray.splice(0, particlesArray.length)
+})
+
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.height = window.innerHeight -150;
 const particlesArray = [];
 let hue = 0;
 
@@ -17,21 +23,18 @@ const mouse = {
     y: undefined,
 }
 
-canvas.addEventListener('click', function (event) {
+function handleEvent(event) {
     mouse.x = event.x;
     mouse.y = event.y;
     for (let i = 0; i < 1; i++) {
         particlesArray.push(new Particle());
     }
-})
+}
 
-canvas.addEventListener('mousemove', function (event) {
-    mouse.x = event.x;
-    mouse.y = event.y;
-    for (let i = 0; i < 1; i++) {
-        particlesArray.push(new Particle());
-    }
-})
+canvas.addEventListener('click', handleEvent);
+canvas.addEventListener('mousemove', handleEvent);
+canvas.addEventListener('touchstart', handleEvent);
+canvas.addEventListener('touchmove', handleEvent);
 
 class Particle {
     constructor() {
