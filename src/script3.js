@@ -13,6 +13,7 @@ const selected = {
 };
 
 const selectedArray = Object.entries(selected);
+console.log(selectedArray[1]);
 
 const firstButton = document.getElementById('id1');
 const secondButton = document.getElementById('id2');
@@ -41,7 +42,8 @@ firstButton.addEventListener('click', function () {
     selected.secondButtonSelected = false;
     selected.thirdButtonSelected = false;
     selected.fourthButtonSelected = false;
-    particlesArray.splice(0, particlesArray.length)
+    particlesArray.splice(0, particlesArray.length);
+    // firstButton.textContent = '🚶🏿‍♀️';
 })
 
 secondButton.addEventListener('click', function () {
@@ -49,7 +51,8 @@ secondButton.addEventListener('click', function () {
     selected.firstButtonSelected = false;
     selected.thirdButtonSelected = false;
     selected.fourthButtonSelected = false;
-    particlesArray.splice(0, particlesArray.length)
+    particlesArray.splice(0, particlesArray.length);
+    // secondButton.textContent = '✨';
 })
 
 thirdButton.addEventListener('click', function () {
@@ -57,7 +60,8 @@ thirdButton.addEventListener('click', function () {
     selected.secondButtonSelected = false;
     selected.firstButtonSelected = false;
     selected.fourthButtonSelected = false;
-    particlesArray.splice(0, particlesArray.length)
+    particlesArray.splice(0, particlesArray.length);
+    // thirdButton.textContent = '🌴';
 })
 
 fourthButton.addEventListener('click', function () {
@@ -65,12 +69,13 @@ fourthButton.addEventListener('click', function () {
     selected.secondButtonSelected = false;
     selected.thirdButtonSelected = false;
     selected.firstButtonSelected = false;
-    particlesArray.splice(0, particlesArray.length)
+    particlesArray.splice(0, particlesArray.length);
+    // fourthButton.textContent = '💎';
 })
 
 
 clearButton.addEventListener('click', function () {
-    particlesArray.splice(0, particlesArray.length)
+    particlesArray.splice(0, particlesArray.length);
 })
 
 window.addEventListener('resize', function () {
@@ -129,15 +134,16 @@ class Particle {
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        if (selected.secondButtonSelected) {
-            if (this.size > 2) this.size -= 1;
-        }
+        // if (selected.secondButtonSelected) {
+        //     if (this.size > 2) this.size -= 1;
+        // }
         if (this.size > 0.2) this.size -= 0.1;
     }
     draw() {
         ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        // ctx.arc(this.x, this.y, this.size, 5, Math.PI * 2);
         ctx.fill();
     }
 }
