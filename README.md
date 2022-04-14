@@ -1,4 +1,4 @@
-I decided to teach myself some HTML canvas as an entry point into WebGL.
+I decided to look into HTML canvas as an entry point into WebGL.
 
 This is my first (very basic) demo 🌠
 
