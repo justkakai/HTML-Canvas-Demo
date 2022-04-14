@@ -1,15 +1,15 @@
-const button = document.getElementById('clear');
-
-button.addEventListener('click', function() {
-    particlesArray.splice(0, particlesArray.length)
-})
-
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight -150;
+canvas.height = 0.75 * window.innerHeight;
 const particlesArray = [];
 let hue = 0;
+
+const clearButton = document.getElementById('clear');
+
+clearButton.addEventListener('click', function() {
+    particlesArray.splice(0, particlesArray.length)
+})
 
 window.addEventListener('resize', function () {
     canvas.width = window.innerWidth;
@@ -23,33 +23,36 @@ const mouse = {
     y: undefined,
 }
 
-function handleEvent(event) {
+canvas.addEventListener('click', function (event) {
     mouse.x = event.x;
     mouse.y = event.y;
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 50; i++) {
         particlesArray.push(new Particle());
     }
-}
+})
 
-canvas.addEventListener('click', handleEvent);
-canvas.addEventListener('mousemove', handleEvent);
-canvas.addEventListener('touchstart', handleEvent);
-canvas.addEventListener('touchmove', handleEvent);
+canvas.addEventListener('mousemove', function (event) {
+    mouse.x = event.x;
+    mouse.y = event.y;
+    for (let i = 0; i < 50; i++) {
+        particlesArray.push(new Particle());
+    }
+})
 
 class Particle {
     constructor() {
         this.x = mouse.x;
         this.y = mouse.y;
-        this.size = Math.random() * 8 + 1;
+        this.size = Math.random() * 7 + 1;
         this.speedX = Math.random() * 3 - 1.5;
         this.speedY = Math.random() * 3 - 1.5;
         this.color = 'hsl(' + hue + ', 100%, 50%)';
     }
     update() {
-        this.x += this.speedX/20;
-        this.y += this.speedY/20;
-        // if (this.size > 0.2) this.size -= 0.1;
-        if (this.size > 2) this.size -= 1;
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.size > 0.2) this.size -= 0.1;
+        //if (this.size > 2) this.size -= 1;
     }
     draw() {
         ctx.fillStyle = this.color;
@@ -67,7 +70,7 @@ function handleParticles() {
             const dx = particlesArray[i].x - particlesArray[j].x;
             const dy = particlesArray[i].y - particlesArray[j].y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            if (distance < 100) {
+            /*if (distance < 100) {
                 ctx.beginPath();
                 ctx.strokeStyle = particlesArray[i].color;
                 // ctx.lineWidth = particlesArray[i].size/10;
@@ -76,9 +79,9 @@ function handleParticles() {
                 ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
                 ctx.stroke();
                 ctx.closePath();
-            }
+            }*/
         }
-        if (particlesArray[i].size <= 1) {
+        if (particlesArray[i].size <= 0.2) {
             particlesArray.splice(i, 1);
             i--;
         }
@@ -95,7 +98,3 @@ function animate() {
 }
 
 animate();
-
-
-
-
