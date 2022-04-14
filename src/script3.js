@@ -5,14 +5,14 @@ canvas.height = 0.75 * window.innerHeight;
 const particlesArray = [];
 let hue = 0;
 
-const selectedButtons = {
+const selected = {
     firstButtonSelected: false,
     secondButtonSelected: false,
     thirdButtonSelected: false,
     fourthButtonSelected: false,
 };
 
-const selectedArray = Object.entries(selectedButtons);
+const selectedArray = Object.entries(selected);
 
 const firstButton = document.getElementById('id1');
 const secondButton = document.getElementById('id2');
@@ -37,31 +37,35 @@ buttonsArray.forEach((button, index, array) => {
 */
 
 firstButton.addEventListener('click', function () {
-    selectedButtons.firstButtonSelected = true;
-    selectedButtons.secondButtonSelected = false;
-    selectedButtons.thirdButtonSelected = false;
-    selectedButtons.fourthButtonSelected = false;
+    selected.firstButtonSelected = true;
+    selected.secondButtonSelected = false;
+    selected.thirdButtonSelected = false;
+    selected.fourthButtonSelected = false;
+    particlesArray.splice(0, particlesArray.length)
 })
 
 secondButton.addEventListener('click', function () {
-    selectedButtons.secondButtonSelected = true;
-    selectedButtons.firstButtonSelected = false;
-    selectedButtons.thirdButtonSelected = false;
-    selectedButtons.fourthButtonSelected = false;
+    selected.secondButtonSelected = true;
+    selected.firstButtonSelected = false;
+    selected.thirdButtonSelected = false;
+    selected.fourthButtonSelected = false;
+    particlesArray.splice(0, particlesArray.length)
 })
 
 thirdButton.addEventListener('click', function () {
-    selectedButtons.thirdButtonSelected = true;
-    selectedButtons.secondButtonSelected = false;
-    selectedButtons.firstButtonSelected = false;
-    selectedButtons.fourthButtonSelected = false;
+    selected.thirdButtonSelected = true;
+    selected.secondButtonSelected = false;
+    selected.firstButtonSelected = false;
+    selected.fourthButtonSelected = false;
+    particlesArray.splice(0, particlesArray.length)
 })
 
 fourthButton.addEventListener('click', function () {
-    selectedButtons.fourthButtonSelected = true;
-    selectedButtons.secondButtonSelected = false;
-    selectedButtons.thirdButtonSelected = false;
-    selectedButtons.firstButtonSelected = false;
+    selected.fourthButtonSelected = true;
+    selected.secondButtonSelected = false;
+    selected.thirdButtonSelected = false;
+    selected.firstButtonSelected = false;
+    particlesArray.splice(0, particlesArray.length)
 })
 
 
@@ -82,22 +86,22 @@ const mouse = {
 function themeProperties(event) {
     mouse.x = event.x;
     mouse.y = event.y;
-    if (selectedButtons.firstButtonSelected) {
-        for (let i = 0; i < 5; i++) {
+    if (selected.firstButtonSelected) {
+        for (let i = 0; i < 1; i++) {
             particlesArray.push(new Particle());
         }
     }
-    if (selectedButtons.secondButtonSelected) {
+    if (selected.secondButtonSelected) {
         for (let i = 0; i < 10; i++) {
             particlesArray.push(new Particle());
         }
     }
-    if (selectedButtons.thirdButtonSelected) {
+    if (selected.thirdButtonSelected) {
         for (let i = 0; i < 25; i++) {
             particlesArray.push(new Particle());
         }
     }
-    if (selectedButtons.fourthButtonSelected) {
+    if (selected.fourthButtonSelected) {
         for (let i = 0; i < 50; i++) {
             particlesArray.push(new Particle());
         }
@@ -111,10 +115,13 @@ class Particle {
     constructor() {
         this.x = mouse.x;
         this.y = mouse.y;
-        if (selectedButtons.secondButtonSelected) {
-            this.size = Math.random() * 25 + 1;
+        if (selected.secondButtonSelected) {
+            this.size = Math.random() * 2 + 1;
+        } else if (selected.thirdButtonSelected) {
+            this.size = Math.random() * 20 + 1;
+        } else {
+            this.size = Math.random() * 7 + 1;
         }
-        this.size = Math.random() * 7 + 1;
         this.speedX = Math.random() * 3 - 1.5;
         this.speedY = Math.random() * 3 - 1.5;
         this.color = 'hsl(' + hue + ', 100%, 50%)';
@@ -122,7 +129,7 @@ class Particle {
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        if (selectedButtons.secondButtonSelected) {
+        if (selected.secondButtonSelected) {
             if (this.size > 2) this.size -= 1;
         }
         if (this.size > 0.2) this.size -= 0.1;
@@ -143,7 +150,7 @@ function handleParticles() {
             const dx = particlesArray[i].x - particlesArray[j].x;
             const dy = particlesArray[i].y - particlesArray[j].y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            if (selectedButtons.secondButtonSelected) {
+            if (selected.secondButtonSelected) {
                 if (distance < 100) {
                     ctx.beginPath();
                     ctx.strokeStyle = particlesArray[i].color;
@@ -157,13 +164,17 @@ function handleParticles() {
             }
 
         }
-        if (selectedButtons.secondButtonSelected) {
+        if (selected.secondButtonSelected) {
             if (particlesArray[i].size <= 0.17) {
                 particlesArray.splice(i, 1);
                 i--;
             }
+        } else {
+            if (particlesArray[i].size <= 0.2) {
+                particlesArray.splice(i, 1);
+                i--;
+            }
         }
-
     }
 }
 

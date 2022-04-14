@@ -23,7 +23,7 @@ body {
 }
 
 #button-container {
-    display: flex;
+  display: flex;
 }
 
 button {
@@ -38,6 +38,11 @@ button {
   border: none;
   border-radius: 5px;
   /* background: linear-gradient(145deg, #ffffff, #3ab8a7); */
-  box-shadow:  5px 5px 10px #e0e0e0,
-             -5px -5px 10px #e2e2e2;
+  box-shadow: 5px 5px 10px #e0e0e0, -5px -5px 10px #e2e2e2;
+}
+
+
+#clear {
+    background-color: black;
+    color: rgb(233, 231, 224);
 }
