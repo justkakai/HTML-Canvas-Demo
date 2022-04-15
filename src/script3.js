@@ -5,6 +5,13 @@ canvas.height = 0.75 * window.innerHeight;
 const particlesArray = [];
 let hue = 0;
 
+/*
+const firstButton = document.getElementById('id1');
+const secondButton = document.getElementById('id2');
+const thirdButton = document.getElementById('id3');
+const fourthButton = document.getElementById('id4');
+*/
+
 let selected = {
     firstButtonSelected: false,
     secondButtonSelected: false,
@@ -13,28 +20,25 @@ let selected = {
 };
 
 const selectedArray = Object.entries(selected);
-
-const firstButton = document.getElementById('id1');
-const secondButton = document.getElementById('id2');
-const thirdButton = document.getElementById('id3');
-const fourthButton = document.getElementById('id4');
 const clearButton = document.getElementById('clear');
-
 const buttons = document.querySelectorAll('#id1, #id2, #id3, #id4');
-const buttonsSpread = [...buttons];
 
-buttonsSpread.forEach((button, index) => {
+const mouse = {
+    x: undefined,
+    y: undefined,
+};
+
+[...buttons].forEach((button, index) => {
     button.addEventListener('click', function() {
         selectedArray.forEach((item, index2) => {
             if (index2 !== index) {
                 item.splice(1, 1, false);
-            } else if (index2 === index) {
+            } else {
                 item.splice(1, 1, true);
             }
         })
         particlesArray.splice(0, particlesArray.length);
         selected = Object.fromEntries(selectedArray);
-        console.log(selected);
     })
 });
 
@@ -47,33 +51,24 @@ window.addEventListener('resize', function () {
     canvas.height = window.innerHeight;
 })
 
-const mouse = {
-    x: undefined,
-    y: undefined,
-}
-
 function themeProperties(event) {
+    let numberOfParticles;
     mouse.x = event.x;
     mouse.y = event.y;
     if (selected.firstButtonSelected) {
-        for (let i = 0; i < 1; i++) {
-            particlesArray.push(new Particle());
-        }
+        numberOfParticles = 1;
     }
     if (selected.secondButtonSelected) {
-        for (let i = 0; i < 10; i++) {
-            particlesArray.push(new Particle());
-        }
+        numberOfParticles = 10;
     }
     if (selected.thirdButtonSelected) {
-        for (let i = 0; i < 25; i++) {
-            particlesArray.push(new Particle());
-        }
+        numberOfParticles = 25;
     }
     if (selected.fourthButtonSelected) {
-        for (let i = 0; i < 50; i++) {
-            particlesArray.push(new Particle());
-        }
+        numberOfParticles = 50;
+    }
+    for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
     }
 }
 

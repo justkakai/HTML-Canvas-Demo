@@ -48,9 +48,10 @@ button:active {
 
 button:focus {
    background-color: rgba(187, 181, 187, 0.308);
+   /* background-color: rgb(240, 219, 230); */
 }
 
 #clear {
   background-color: black;
-  color: rgb(233, 231, 224);
+  color: rgb(204, 204, 204);
 }
