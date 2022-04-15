@@ -5,7 +5,7 @@ canvas.height = 0.75 * window.innerHeight;
 const particlesArray = [];
 let hue = 0;
 
-const selected = {
+let selected = {
     firstButtonSelected: false,
     secondButtonSelected: false,
     thirdButtonSelected: false,
@@ -13,7 +13,6 @@ const selected = {
 };
 
 const selectedArray = Object.entries(selected);
-console.log(selectedArray[1]);
 
 const firstButton = document.getElementById('id1');
 const secondButton = document.getElementById('id2');
@@ -21,58 +20,23 @@ const thirdButton = document.getElementById('id3');
 const fourthButton = document.getElementById('id4');
 const clearButton = document.getElementById('clear');
 
-const buttonsArray = [firstButton, secondButton, thirdButton, fourthButton];
-/*
-buttonsArray.forEach((button, index, array) => {
+const buttons = document.querySelectorAll('#id1, #id2, #id3, #id4');
+const buttonsSpread = [...buttons];
+
+buttonsSpread.forEach((button, index) => {
     button.addEventListener('click', function() {
-        selectedArray.forEach((item, index2, array2) => {
-            if (index2 === index) {
-                array2[index][1] = true;
-            } else {
-                array2[index][1] = false;
+        selectedArray.forEach((item, index2) => {
+            if (index2 !== index) {
+                item.splice(1, 1, false);
+            } else if (index2 === index) {
+                item.splice(1, 1, true);
             }
-            console.log(item);
         })
+        particlesArray.splice(0, particlesArray.length);
+        selected = Object.fromEntries(selectedArray);
+        console.log(selected);
     })
 });
-*/
-
-firstButton.addEventListener('click', function () {
-    selected.firstButtonSelected = true;
-    selected.secondButtonSelected = false;
-    selected.thirdButtonSelected = false;
-    selected.fourthButtonSelected = false;
-    particlesArray.splice(0, particlesArray.length);
-    // firstButton.textContent = '🚶🏿‍♀️';
-})
-
-secondButton.addEventListener('click', function () {
-    selected.secondButtonSelected = true;
-    selected.firstButtonSelected = false;
-    selected.thirdButtonSelected = false;
-    selected.fourthButtonSelected = false;
-    particlesArray.splice(0, particlesArray.length);
-    // secondButton.textContent = '✨';
-})
-
-thirdButton.addEventListener('click', function () {
-    selected.thirdButtonSelected = true;
-    selected.secondButtonSelected = false;
-    selected.firstButtonSelected = false;
-    selected.fourthButtonSelected = false;
-    particlesArray.splice(0, particlesArray.length);
-    // thirdButton.textContent = '🌴';
-})
-
-fourthButton.addEventListener('click', function () {
-    selected.fourthButtonSelected = true;
-    selected.secondButtonSelected = false;
-    selected.thirdButtonSelected = false;
-    selected.firstButtonSelected = false;
-    particlesArray.splice(0, particlesArray.length);
-    // fourthButton.textContent = '💎';
-})
-
 
 clearButton.addEventListener('click', function () {
     particlesArray.splice(0, particlesArray.length);
