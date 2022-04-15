@@ -21,6 +21,7 @@ let selected = {
 
 const selectedArray = Object.entries(selected);
 const clearButton = document.getElementById('clear');
+const modeButton = document.getElementById('mode');
 const buttons = document.querySelectorAll('#id1, #id2, #id3, #id4');
 
 const mouse = {
@@ -29,7 +30,7 @@ const mouse = {
 };
 
 [...buttons].forEach((button, index) => {
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
         selectedArray.forEach((item, index2) => {
             if (index2 !== index) {
                 item.splice(1, 1, false);
@@ -44,12 +45,21 @@ const mouse = {
 
 clearButton.addEventListener('click', function () {
     particlesArray.splice(0, particlesArray.length);
+});
+
+modeButton.addEventListener('click', function() {
+    canvas.classList.toggle("dark-mode");
+    if (modeButton.textContent === 'toggle light mode ☀') {
+        modeButton.textContent = 'toggle dark mode ☽';
+    } else if (modeButton.textContent === 'toggle dark mode ☽') {
+        modeButton.textContent = 'toggle light mode ☀';
+    } 
 })
 
 window.addEventListener('resize', function () {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-})
+});
 
 function themeProperties(event) {
     let numberOfParticles;
@@ -86,7 +96,11 @@ class Particle {
         } else {
             this.size = Math.random() * 7 + 1;
         }
-        this.speedX = Math.random() * 3 - 1.5;
+        if (selected.thirdButtonSelected) {
+            this.speedX = Math.random() * 13 - 1.5;
+        } else {
+            this.speedX = Math.random() * 3 - 1.5;
+        }
         this.speedY = Math.random() * 3 - 1.5;
         this.color = 'hsl(' + hue + ', 100%, 50%)';
     }
@@ -101,8 +115,12 @@ class Particle {
     draw() {
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        // ctx.arc(this.x, this.y, this.size, 5, Math.PI * 2);
+
+        if (selected.fourthButtonSelected) {
+            ctx.arc(this.x, this.y, this.size, 1, Math.PI * 2);
+        } else {
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        }
         ctx.fill();
     }
 }
