@@ -49,10 +49,16 @@ clearButton.addEventListener('click', function () {
 
 modeButton.addEventListener('click', function() {
     canvas.classList.toggle("dark-mode");
-    if (modeButton.textContent === 'toggle light mode ☀') {
-        modeButton.textContent = 'toggle dark mode ☽';
-    } else if (modeButton.textContent === 'toggle dark mode ☽') {
-        modeButton.textContent = 'toggle light mode ☀';
+    if (modeButton.textContent === 'light ☀ mode') {
+        modeButton.textContent = 'dark ☽ mode';
+        clearButton.style.backgroundColor = '#d68caf';
+        clearButton.style.color = 'white';
+        clearButton.style.textShadow = 'none';
+    } else if (modeButton.textContent === 'dark ☽ mode') {
+        modeButton.textContent = 'light ☀ mode';
+        clearButton.style.backgroundColor = 'black';
+        clearButton.style.color = 'white';
+        clearButton.style.textShadow = 'rgba(255,255,255,1) 0px 0px 2px';
     } 
 })
 
